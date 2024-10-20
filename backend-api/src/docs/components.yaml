@@ -1,0 +1,120 @@
+# components:
+#   schemas:
+#     User:
+#       type: object
+#       properties:
+#         user_id:
+#           type: integer
+#           description: The user ID.
+#           readOnly: true
+#         username:
+#           type: string
+#           description: The username.
+#         pass:
+#           type: string
+#           description: The password.
+#         email:
+#           type: string
+#           format: email
+#           description: The user's email address.
+#         full_name:
+#           type: string
+#           description: The user's full name.
+#         phone_number:
+#           type: string
+#           description: The user's phone number.
+#         address:
+#           type: string
+#           description: The user's address.
+#         role:
+#           type: string
+#           description: The user's role.
+#         created_at:
+#           type: string
+#           format: date-time
+#           description: The date and time when the user was created.
+#         updated_at:
+#           type: string
+#           format: date-time
+#           description: The date and time when the user was last updated.
+#     Pagination:
+#       type: object
+#       properties:
+#         total:
+#           type: integer
+#           default: 0
+#           description: The total number of items.
+#         page:
+#           type: integer
+#           default: 1
+#           description: The current page number.
+#         limit:
+#           type: integer
+#           default: 5
+#           description: The number of items per page.
+#         firstPage:
+#           type: integer
+#           default: 1
+#           description: The first page number.
+#         lastPage:
+#           type: integer
+#           default: 1
+#           description: The last page number.
+#   responses:
+#     200:
+#       description: OK
+#     201:
+#       description: Created
+#     400:
+#       description: Bad Request
+#     401:
+#       description: Unauthorized
+#     403:
+#       description: Forbidden
+#     '200NoData':
+#       content:
+#         application/json:
+#           schema:
+#             type: object
+#             properties:
+#               status:
+#                 type: string
+#                 description: The response status
+#                 enum:
+#                   - success
+#               data:
+#                 type: object
+#                 nullable: true
+#                 default: null
+#                 description: The response data
+#   parameters:
+#     userIdParam:
+#       name: id
+#       description: User ID
+#       required: true
+#       in: path
+#       schema:
+#         type: integer
+
+#     limitParam:
+#       name: limit
+#       description: Number of records per page
+#       in: query
+#       schema:
+#         type: integer
+#         default: 5
+#         minimum: 1
+#         maximum: 100
+#       required: false
+
+#     pageParam:
+#       name: page
+#       description: Page number of records
+#       in: query
+#       schema:
+#         type: integer
+#         default: 1
+#         minimum: 1
+#       required: false
+          
+          
