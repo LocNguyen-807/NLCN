@@ -62,3 +62,22 @@ exports.deleteProduct = async (req, res, next) => {
         return next(new ApiError(500, 'Không thể xóa sản phẩm'));
     }
 }
+
+exports.getTopSellingProductsByCategory = async (req, res, next) => {
+    try {
+        const categoryId = req.query.category_id;
+        const limit = parseInt(req.query.limit) || 5; // Mặc định lấy top 5 sản phẩm
+
+        if (!categoryId) {
+            return next(new ApiError(400, 'Thiếu category_id'));
+        }
+
+        // Lấy danh sách sản phẩm bán chạy từ inventory
+        const topSelling = await productAdjust.getTopSellingProductsByCategory(categoryId, limit);
+        
+        res.status(200).json(jsend.success(topSelling));
+    } catch (err) {
+        console.log(err);
+        return next(new ApiError(500, 'Không thể lấy danh sách sản phẩm bán chạy'));
+    }
+}

@@ -34,5 +34,9 @@ async function deleteReview(id){
     return deletedReview;
 }
 
-module.exports = { reviews };
+module.exports = { 
+    makeReview,
+    editReview,
+    deleteReview
+ };
 

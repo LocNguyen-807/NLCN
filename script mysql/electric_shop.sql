@@ -50,9 +50,10 @@ CREATE TABLE inventory (
     product_id INT NOT NULL,
     stock_quantity INT NOT NULL DEFAULT 0,
     restock_level INT DEFAULT 10,  -- Mức cảnh báo khi số lượng hàng gần hết
+    restock_quantity INT DEFAULT 0,
+    sold_quantity INT DEFAULT 0,
     last_restock_date TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 

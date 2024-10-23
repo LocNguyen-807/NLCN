@@ -11,6 +11,7 @@ module.exports.setup = (app) => {
     router.post('/', productController.createProduct);
     router.put('/:id', productController.editProduct);
     router.delete('/:id', productController.deleteProduct);
+    router.get('/top-selling', productController.getTopSellingProductsByCategory);
 
     router.all('*', errorController.methodNotAllowed);
 }

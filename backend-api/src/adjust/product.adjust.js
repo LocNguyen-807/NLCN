@@ -45,6 +45,12 @@ async function getAllProducts(query){
     }
 }
 
+async function getProductById(id){
+    return await products().where({ id }).first();
+}
+
+
+
 async function createProduct(data){
     const product = await readProduct(data);
     const [id] = await products().insert(product);
@@ -65,10 +71,33 @@ async function deleteProduct(id){
     return deletedProduct;
 }
 
+async function getTopSellingProductsByCategory(categoryId, limit) {
+    const knex = require('../db/knex');
+    
+    return await knex('products as p')
+        .join('inventory as i', 'p.id', 'i.product_id')
+        .select(
+            'p.id',
+            'p.name',
+            'p.description',
+            'p.price',
+            'p.img',
+            'p.category_id',
+            'i.sold_quantity',
+            'i.stock_quantity',
+            knex.raw('CAST(i.sold_quantity AS FLOAT) / NULLIF(i.restock_quantity, 0) as sell_ratio')
+        )
+        .where('p.category_id', categoryId)
+        .orderBy('i.sold_quantity', 'desc')
+        .limit(limit);
+}
+
 module.exports = {
+    getProductById,
     getAllProducts,
     createProduct,
     editProduct,
-    deleteProduct
+    deleteProduct,
+    getTopSellingProductsByCategory
 }
 

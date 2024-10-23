@@ -14,11 +14,13 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 const userRouter = require('./routes/user.router');
 const productRouter = require('./routes/product.router');
 const reviewRouter = require('./routes/review.router'); 
+const inventoryRouter = require('./routes/inventory.router');
+
 
 userRouter.setup(app);
 productRouter.setup(app);
 reviewRouter.setup(app);
-
+inventoryRouter.setup(app);
 app.use(resourceNotFound);
 app.use(handleError);
 
